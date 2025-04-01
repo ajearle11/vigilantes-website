@@ -1,17 +1,7 @@
-import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
 import { ReactQueryProvider } from "./providers/ReactQueryProvider";
 import { StarfieldCanvas } from "./components";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: "Vigilantes Files",
@@ -24,12 +14,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html data-theme="dim" lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={` antialiased`}
       >
-        <div className="relative min-h-screen overflow-auto bg-black flex items-center justify-center text-white">
+        <div className=" min-h-screen overflow-auto bg-black flex items-center justify-center text-white">
           <StarfieldCanvas />
+ 
 
           <div className="h-screen z-10 flex flex-col">
             <ReactQueryProvider>{children}</ReactQueryProvider>

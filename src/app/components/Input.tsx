@@ -1,95 +1,112 @@
 "use client";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { sendEmail } from "../utils/apiRequests";
+import { strictEmailRegex } from "../utils/helpers";
 
 type TInput = {
   image?: boolean;
   imagesrc?: string;
 };
 
-const sendEmail = async (email: string) => {
-  const response = await fetch("/api/send-email", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email }),
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to send email");
-  }
-
-  return response.json();
-};
-
 const Input = ({ image = false, imagesrc }: TInput) => {
   const [email, setEmail] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [regexError, setRegexError] = useState(false);
 
-  const { mutate, isPending, isError, error } = useMutation({
+  const { mutate, isPending, error } = useMutation({
     mutationFn: sendEmail,
     onSuccess: () => {
       setShowSuccess(true);
       setEmail("");
       setTimeout(() => setShowSuccess(false), 3000); // auto hide
     },
+    onError: () => {
+      setIsError(true);
+    },
   });
 
   const handleSubmit = () => {
-    if (!email) return;
+    if (!email || regexError) return;
     mutate(email);
   };
 
   return (
-    <div className="relative w-full max-w-md mx-auto">
-      <input
-        placeholder="Enter your email"
-        value={email}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") handleSubmit();
-        }}
-        onChange={(e) => setEmail(e.target.value)}
-        disabled={isPending}
-        className="flex h-12 w-full rounded-xl border border-amber-700 
-        bg-amber-900/70 px-4 pr-12 text-neutral-300
-        placeholder:text-neutral-300 shadow-md transition-all duration-200 ease-in-out
-        focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2
-        hover:shadow-lg hover:shadow-amber-500/20 focus:scale-[1.01]
-        disabled:opacity-60 disabled:cursor-not-allowed"
-      />
-      {image && (
-        <>
-          <button
-            onClick={handleSubmit}
+    <div className="w-full max-w-md mx-auto">
+      <fieldset className="fieldset">
+        <legend className="fieldset-legend mb-1">
+          Want to stay informed? Add your email address here
+        </legend>
+        <label
+          className={`input ${
+            isError || regexError
+              ? "input-error"
+              : showSuccess
+              ? "input-success"
+              : "input-neutral"
+          } input-md`}
+        >
+          <input
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (e.target.value !== "") {
+                !strictEmailRegex.test(e.target.value)
+                  ? setRegexError(true)
+                  : setRegexError(false);
+              } else {
+                setRegexError(false);
+                setIsError(false);
+              }
+            }}
             disabled={isPending}
-            className="cursor-pointer absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full p-2 
-          transition hover:scale-110 hover:brightness-125 
-          focus:outline-none focus:ring-1 focus:ring-orange-500 focus:ring-offset-1
-          disabled:opacity-60 disabled:cursor-not-allowed"
-          >
-            {isPending ? (
-              <div className="w-5 h-5 border-2 border-orange-400 border-t-transparent rounded-full animate-spin" />
-            ) : (
-              <img
-                src={imagesrc}
-                alt="Send"
-                className="w-5 h-5 opacity-90 transition"
-              />
-            )}
-          </button>
-          {isError && (
-            <p className="mt-2 pb-10 absolute  text-sm text-red-400">
-              Error: {(error as Error).message}
-            </p>
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSubmit();
+            }}
+            type="email"
+            className="grow"
+            placeholder="Enter your email"
+          />
+          {image && (
+            <span>
+              <button
+                onClick={handleSubmit}
+                disabled={isPending}
+                className="cursor-pointer  p-2 
+              transition hover:scale-110 hover:brightness-125 
+              "
+              >
+                {isPending ? (
+                  <span className="loading loading-spinner loading-md text-neutral mb-1"></span>
+                ) : (
+                  <img
+                    src={imagesrc}
+                    alt="Send"
+                    className="ml-2 w-6 h-7 opacity-90 transition"
+                  />
+                )}
+              </button>
+            </span>
           )}
-          {showSuccess && (
-            <p className="mt-2 pb-10 absolute text-sm text-green-400">
-              Email sent successfully!
-            </p>
-          )}
-        </>
-      )}
+        </label>
+        <p
+          className={`fieldset-label  ${
+            isError || regexError
+              ? `text-error`
+              : showSuccess
+              ? "text-success"
+              : ""
+          }`}
+        >
+          {isError
+            ? `Error: ${(error as Error).message}`
+            : regexError
+            ? "Please enter a valid email address"
+            : showSuccess
+            ? "Email sent successfully"
+            : ""}
+        </p>
+      </fieldset>
     </div>
   );
 };
