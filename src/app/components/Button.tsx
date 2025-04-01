@@ -1,4 +1,6 @@
-type ButtonProps = {
+"use client"
+
+type TButton = {
   title: string;
   twColor: keyof typeof colorClassMap;
   shadowColor: string;
@@ -20,7 +22,7 @@ const colorClassMap = {
   },
 };
 
-const Button = (buttonProps: ButtonProps) => {
+const Button = (buttonProps: TButton) => {
   const color = colorClassMap[buttonProps.twColor];
 
   return (

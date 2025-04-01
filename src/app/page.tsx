@@ -1,4 +1,3 @@
-"use client"
 import { DownloadOptions } from "./components";
 
 export default function Home() {
