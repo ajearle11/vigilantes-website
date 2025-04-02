@@ -7,16 +7,17 @@ type TButton = {
 };
 
 const Button = (buttonProps: TButton) => {
-  const colorSwitch = (color: "btn-primary" | "btn-secondary" | "btn-accent"): string => {
+  const colorSwitch = (
+    color: "btn-primary" | "btn-secondary" | "btn-accent"
+  ): string => {
     switch (color) {
       case "btn-primary":
-        
         return "shadow-[0_0_15px_#ff69b4]";
-        case "btn-secondary":
+      case "btn-secondary":
         return "shadow-[0_0_15px_#00ffff]";
-        case "btn-accent":
+      case "btn-accent":
         return "shadow-[0_0_15px_#f3cc30]";
-        default:
+      default:
         return "";
     }
   };
