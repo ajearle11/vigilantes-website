@@ -21,9 +21,9 @@ const DownloadLayout = () => {
             );
           }}
           title="Life In The Fast Brain"
-          twColor="primary"
+          twColor="btn-primary"
         />
-        <Button onClick={rickRoll} title="Mondays" twColor="secondary" />
+        <Button onClick={rickRoll} title="Mondays" twColor="btn-secondary" />
         {/* <Button onClick={rickRoll} title="Sink" twColor="accent" /> */}
       </div>
       <div className="flex-4 justify-center flex flex-col mx-4">
