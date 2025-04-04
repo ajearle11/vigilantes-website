@@ -20,7 +20,7 @@ type SendEmailResponse = {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ sanitizedEmail }),
+        body: JSON.stringify({ email: sanitizedEmail }),
       });
 
       const data = await response.json();

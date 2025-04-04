@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@tanstack/react-query": "^5.71.1",
     "daisyui": "^5.0.9",
     "next": "15.2.4",
+    "next-rate-limit": "^0.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "validator": "^13.15.0"
@@ -19,7 +21,8 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/mailchimp__mailchimp_marketing": "^3.0.21",
+    "@types/node": "^20.17.30",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/validator": "^13.12.3",

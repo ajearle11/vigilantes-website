@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { sendEmail } from "../utils/apiRequests";
 import { strictEmailRegex } from "../utils/helpers";
@@ -12,23 +12,43 @@ type TInput = {
 const Input = ({ image = false, imagesrc }: TInput) => {
   const [email, setEmail] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const [isError, setIsError] = useState(false);
   const [regexError, setRegexError] = useState(false);
+  const [errorAnimation, setErrorAnimtaion] = useState(false);
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: sendEmail,
-    onSuccess: () => {
+    onSuccess: (data) => {
       setShowSuccess(true);
+      setSuccessMessage(data.message);
       setEmail("");
-      setTimeout(() => setShowSuccess(false), 3000); // auto hide
+      data.message !== "Email already subscribed" &&
+        setTimeout(() => setShowSuccess(false), 3000);
     },
+
     onError: () => {
       setIsError(true);
     },
   });
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setErrorAnimtaion(false); 
+    }, 1000); 
+
+    return () => clearTimeout(timer);
+  }, [errorAnimation])
+
   const handleSubmit = () => {
-    if (!email || regexError) return;
+    if (!email || regexError) {
+      setErrorAnimtaion(true);
+      return;
+    }
+
+    setIsError(false);
+    setRegexError(false);
+
     mutate(email);
   };
 
@@ -40,17 +60,21 @@ const Input = ({ image = false, imagesrc }: TInput) => {
         </legend>
         <label
           className={`input ${
-            isError || regexError
+            isError ||
+            regexError ||
+            (showSuccess && successMessage === "Email already subscribed")
               ? "input-error"
               : showSuccess
               ? "input-success"
               : "input-neutral"
-          } input-md`}
+          } input-md ${errorAnimation ? "animate-shake" : ""}`}
         >
           <input
             onChange={(e) => {
+              setSuccessMessage("");
               setEmail(e.target.value);
               if (e.target.value !== "") {
+                setShowSuccess(false)
                 !strictEmailRegex.test(e.target.value)
                   ? setRegexError(true)
                   : setRegexError(false);
@@ -63,6 +87,7 @@ const Input = ({ image = false, imagesrc }: TInput) => {
             onKeyDown={(e) => {
               if (e.key === "Enter") handleSubmit();
             }}
+            value={email}
             type="email"
             className="grow"
             placeholder="Enter your email"
@@ -91,7 +116,9 @@ const Input = ({ image = false, imagesrc }: TInput) => {
         </label>
         <p
           className={`fieldset-label  ${
-            isError || regexError
+            isError ||
+            regexError ||
+            (showSuccess && successMessage === "Email already subscribed")
               ? `text-error`
               : showSuccess
               ? "text-success"
@@ -103,7 +130,7 @@ const Input = ({ image = false, imagesrc }: TInput) => {
             : regexError
             ? "Please enter a valid email address"
             : showSuccess
-            ? "Email sent successfully"
+            ? successMessage
             : ""}
         </p>
       </fieldset>
