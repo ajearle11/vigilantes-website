@@ -12,10 +12,7 @@ export async function POST(req: NextRequest) {
   try {
     await limiter.checkNext(req, 5); // ✅ Add `await` here
   } catch {
-    return NextResponse.json(
-      { message: "Too many requests" },
-      { status: 429 }
-    );
+    return NextResponse.json({ message: "Too many requests" }, { status: 429 });
   }
 
   const body = await req.json();
@@ -48,8 +45,13 @@ export async function POST(req: NextRequest) {
         { status: 200 }
       );
     }
-  } catch (err: any) {
-    if (err.status !== 404) {
+  } catch (err: unknown) {
+    if (
+      typeof err === "object" &&
+      err !== null &&
+      "status" in err &&
+      (err as any).status !== 404
+    ) {
       return NextResponse.json(
         { message: "Error checking subscription" },
         { status: 500 }
@@ -67,11 +69,19 @@ export async function POST(req: NextRequest) {
       { message: "Successfully subscribed" },
       { status: 200 }
     );
-  } catch (error: any) {
-    console.error("Mailchimp subscription error:", error);
-    return NextResponse.json(
-      { message: error.message || "Subscription failed" },
-      { status: 500 }
-    );
+  } catch (err: unknown) {
+    if (
+      typeof err === "object" &&
+      err !== null &&
+      "status" in err &&
+      (err as any).status !== 404
+    ) {
+      const message =
+        "message" in err && typeof (err as any).message === "string"
+          ? (err as any).message
+          : "Subscription failed";
+
+      return NextResponse.json({ message }, { status: 500 });
+    }
   }
 }
