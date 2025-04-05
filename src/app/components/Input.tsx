@@ -23,8 +23,9 @@ const Input = ({ image = false, imagesrc }: TInput) => {
       setShowSuccess(true);
       setSuccessMessage(data.message);
       setEmail("");
-      data.message !== "Email already subscribed" &&
+      if (data.message !== "Email already subscribed") {
         setTimeout(() => setShowSuccess(false), 3000);
+      }
     },
 
     onError: () => {
@@ -34,11 +35,11 @@ const Input = ({ image = false, imagesrc }: TInput) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setErrorAnimtaion(false); 
-    }, 1000); 
+      setErrorAnimtaion(false);
+    }, 1000);
 
     return () => clearTimeout(timer);
-  }, [errorAnimation])
+  }, [errorAnimation]);
 
   const handleSubmit = () => {
     if (!email || regexError) {
@@ -74,10 +75,12 @@ const Input = ({ image = false, imagesrc }: TInput) => {
               setSuccessMessage("");
               setEmail(e.target.value);
               if (e.target.value !== "") {
-                setShowSuccess(false)
-                !strictEmailRegex.test(e.target.value)
-                  ? setRegexError(true)
-                  : setRegexError(false);
+                setShowSuccess(false);
+                if (!strictEmailRegex.test(e.target.value)) {
+                  setRegexError(true);
+                } else {
+                  setRegexError(false);
+                }
               } else {
                 setRegexError(false);
                 setIsError(false);
