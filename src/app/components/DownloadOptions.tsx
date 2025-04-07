@@ -10,9 +10,15 @@ const DownloadLayout = () => {
     "https://shattereddisk.github.io/rickroll/rickroll.mp4"
   );
 
+  const goToGoldenRecord = useNavigateToUrl(
+    "https://goldenrecord.org"
+  )
+
   return (
     <>
-      <div className="flex flex-col flex-6 justify-end">
+      <div className="flex flex-col flex-2 justify-end"></div>
+      <Button onClick={goToGoldenRecord} title="Golden Record" twColor="btn-primary" />
+      <div className="flex flex-col flex-4 justify-end">
         <Button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
@@ -23,7 +29,7 @@ const DownloadLayout = () => {
           title="Life In The Fast Brain"
           twColor="btn-primary"
         />
-        <Button onClick={rickRoll} title="Mondays" twColor="btn-secondary" />
+        <Button onClick={rickRoll} title="Mondays" twColor="btn-primary" />
         {/* <Button onClick={rickRoll} title="Sink" twColor="accent" /> */}
       </div>
       <div className="flex-4 justify-center flex flex-col mx-4">

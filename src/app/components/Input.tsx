@@ -56,7 +56,7 @@ const Input = ({ image = false, imagesrc }: TInput) => {
   return (
     <div className="w-full max-w-md mx-auto">
       <fieldset className="fieldset">
-        <legend className="fieldset-legend mb-1">
+        <legend className="fieldset-legend mb-1 opacity-80">
           Want to stay informed? Add your email address here
         </legend>
         <label
@@ -68,7 +68,7 @@ const Input = ({ image = false, imagesrc }: TInput) => {
               : showSuccess
               ? "input-success"
               : "input-neutral"
-          } input-md ${errorAnimation ? "animate-shake" : ""}`}
+          } input-md opacity-80 ${errorAnimation ? "animate-shake" : ""}`}
         >
           <input
             onChange={(e) => {

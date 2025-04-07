@@ -12,7 +12,7 @@ const Button = (buttonProps: TButton) => {
   ): string => {
     switch (color) {
       case "btn-primary":
-        return "shadow-[0_0_15px_#ff69b4]";
+        return "shadow-[0_0_15px_#c8ab0f]";
       case "btn-secondary":
         return "shadow-[0_0_15px_#00ffff]";
       case "btn-accent":
@@ -28,7 +28,7 @@ const Button = (buttonProps: TButton) => {
         onClick={buttonProps.onClick}
         className={`btn btn-xl btn-outline ${
           buttonProps.twColor
-        } my-4 mx-3 font-bold ${colorSwitch(buttonProps.twColor)}`}
+        } opacity-80 my-4 mx-3 font-bold ${colorSwitch(buttonProps.twColor)}`}
       >
         {buttonProps.title}
       </button>
