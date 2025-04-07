@@ -6,7 +6,7 @@ type TButton = {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Button = (buttonProps: TButton) => {
+const Button = ({ title, twColor, onClick }: TButton) => {
   const colorSwitch = (
     color: "btn-primary" | "btn-secondary" | "btn-accent"
   ): string => {
@@ -23,16 +23,15 @@ const Button = (buttonProps: TButton) => {
   };
 
   return (
-    <>
-      <button
-        onClick={buttonProps.onClick}
-        className={`btn btn-xl btn-outline ${
-          buttonProps.twColor
-        } opacity-80 my-4 mx-3 font-bold ${colorSwitch(buttonProps.twColor)}`}
-      >
-        {buttonProps.title}
-      </button>
-    </>
+    <button
+      onClick={(e) => {
+        e.currentTarget.blur(); 
+        onClick(e);
+      }}
+      className={`active:scale-100 btn btn-xl btn-outline ${twColor} opacity-80 my-4 mx-3 font-bold ${colorSwitch(twColor)} focus:outline-none active:outline-none`}
+    >
+      {title}
+    </button>
   );
 };
 
