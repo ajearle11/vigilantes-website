@@ -7,11 +7,11 @@ import { handleDownload } from "../utils/helpers";
 import { useEffect, useState } from "react";
 
 const DownloadLayout = () => {
-  const [timestamp, setTimestamp] = useState(0)
+  const [timestamp, setTimestamp] = useState(0);
 
   useEffect(() => {
-    setTimestamp(Date.now())
-  }, [])
+    setTimestamp(Date.now());
+  }, []);
 
   const rickRoll = useNavigateToUrl(
     "https://shattereddisk.github.io/rickroll/rickroll.mp4"
@@ -42,7 +42,7 @@ const DownloadLayout = () => {
         />
         <Button onClick={rickRoll} title="More Info..." twColor="btn-primary" />
         {/* <Button onClick={rickRoll} title="Sink" twColor="accent" /> */}
-        <div className="mt-15 mb-30 mx-4">
+        <div className=" mt-15 mb-30 mx-4">
           <Input image={true} imagesrc="/rightSend.svg" />
           <div className="mt-10 text-xs text-center uppercase tracking-widest text-[#888] mb-4 font-mono">
             {timestamp}

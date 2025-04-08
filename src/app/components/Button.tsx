@@ -25,10 +25,12 @@ const Button = ({ title, twColor, onClick }: TButton) => {
   return (
     <button
       onClick={(e) => {
-        e.currentTarget.blur(); 
+        e.currentTarget.blur();
         onClick(e);
       }}
-      className={`active:scale-100 btn btn-xl btn-outline ${twColor} opacity-80 my-4 mx-3 font-bold ${colorSwitch(twColor)} focus:outline-none active:outline-none`}
+      className={`p-8 font-mono uppercase btn btn-xl btn-outline ${twColor} opacity-80 my-4 mx-5 font-bold ${colorSwitch(
+        twColor
+      )}`}
     >
       {title}
     </button>
