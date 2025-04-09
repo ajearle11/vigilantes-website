@@ -31,6 +31,7 @@ export default function RootLayout({
 
           <div className="h-screen z-10 flex flex-col">
             <ReactQueryProvider>{children}</ReactQueryProvider>
+            <Analytics/>
           </div>
         </div>
       </body>
