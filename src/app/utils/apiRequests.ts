@@ -57,7 +57,7 @@ const sendAnalytics = async () => {
 
     return data;
   } catch (error) {
-    console.error("Failed");
+    console.error(error);
   }
 };
 

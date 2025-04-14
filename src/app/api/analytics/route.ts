@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
         ? db.collection("dev")
         : db.collection("analytics");
 
-    const result = await collection.updateOne(
+    await collection.updateOne(
       { type: "download_counter" },
       { $inc: { download: download || 1 } },
       { upsert: true }

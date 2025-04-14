@@ -5,7 +5,6 @@ import { useNavigateToUrl } from "../hooks";
 import { Input } from "./";
 import { handleDownload } from "../utils/helpers";
 import { useEffect, useState } from "react";
-import clientPromise from "../lib/mongodb"
 import { useMutation } from "@tanstack/react-query";
 import { sendAnalytics } from "../utils/apiRequests";
 
@@ -22,7 +21,7 @@ const DownloadLayout = () => {
 
   const goToGoldenRecord = useNavigateToUrl("https://goldenrecord.org");
 
-  const { mutate, isPending, error } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: sendAnalytics,
   });
 
