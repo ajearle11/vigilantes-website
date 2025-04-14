@@ -8,25 +8,27 @@ if (!process.env.MONGODB_URI) {
 const uri = process.env.MONGODB_URI;
 const options = {};
 
-// Add custom type to NodeJS.Global for _mongoClientPromise
+// Properly type globalThis to avoid 'any'
 declare global {
-  // Allow setting this global variable in development
+  // eslint-disable-next-line no-var
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-// Initialize cached client and client promise
+// Prevent TS error on first access
+globalThis._mongoClientPromise ||= undefined;
+
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
 if (process.env.NODE_ENV === "development") {
-  // Use global variable to preserve connection across hot reloads
-  if (!global._mongoClientPromise) {
+  // Use cached connection in dev to avoid hot reload issues
+  if (!globalThis._mongoClientPromise) {
     client = new MongoClient(uri, options);
-    global._mongoClientPromise = client.connect();
+    globalThis._mongoClientPromise = client.connect();
   }
-  clientPromise = global._mongoClientPromise;
+  clientPromise = globalThis._mongoClientPromise;
 } else {
-  // In production, always create a new client
+  // Always create a new client in production
   client = new MongoClient(uri, options);
   clientPromise = client.connect();
 }
