@@ -1,4 +1,3 @@
-
 import "./globals.css";
 import { ReactQueryProvider } from "./providers/ReactQueryProvider";
 import { StarfieldCanvas } from "./components";
@@ -7,7 +6,12 @@ import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: "Vigilantes Files",
-  description: "App for users to download and view content from the band, Vigilantes",
+  description:
+    "App for users to download and view content from the band, Vigilantes",
+
+  icons: {
+    icon: "/satelite.svg",
+  },
 };
 
 const inter = Inter({
@@ -22,16 +26,13 @@ export default function RootLayout({
 }>) {
   return (
     <html data-theme="dim" lang="en">
-      <body
-        className={`${inter.className} antialiased`}
-      >
+      <body className={`${inter.className} antialiased`}>
         <div className=" min-h-screen overflow-auto bg-black flex items-center justify-center text-white">
           <StarfieldCanvas />
- 
 
           <div className="h-screen z-10 flex flex-col">
             <ReactQueryProvider>{children}</ReactQueryProvider>
-            <Analytics/>
+            <Analytics />
           </div>
         </div>
       </body>

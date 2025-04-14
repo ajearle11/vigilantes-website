@@ -5,6 +5,9 @@ import { useNavigateToUrl } from "../hooks";
 import { Input } from "./";
 import { handleDownload } from "../utils/helpers";
 import { useEffect, useState } from "react";
+import clientPromise from "../lib/mongodb"
+import { useMutation } from "@tanstack/react-query";
+import { sendAnalytics } from "../utils/apiRequests";
 
 const DownloadLayout = () => {
   const [timestamp, setTimestamp] = useState(0);
@@ -18,6 +21,10 @@ const DownloadLayout = () => {
   );
 
   const goToGoldenRecord = useNavigateToUrl("https://goldenrecord.org");
+
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: sendAnalytics,
+  });
 
   return (
     <>
@@ -36,6 +43,7 @@ const DownloadLayout = () => {
             handleDownload(
               "https://dl.dropboxusercontent.com/scl/fi/sdupb68odyuz1d9jpmb8b/Life-In-The-Fast-Brain-Stems.zip?rlkey=rzwsolwvzltc8mbgy706qpxnv&dl=1"
             );
+            mutate()
           }}
           title="Life In The Fast Brain Files"
           twColor="btn-primary"
