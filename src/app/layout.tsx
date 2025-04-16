@@ -1,8 +1,13 @@
 import "./globals.css";
 import { ReactQueryProvider } from "./providers/ReactQueryProvider";
-import { StarfieldCanvas } from "./components";
+import {
+  AnonymousSignin,
+  StarfieldCanvas,
+  ViewportHeightFix,
+} from "./components";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SessionProvider } from "./providers/SessionProvider";
 
 export const metadata = {
   title: "Vigilantes Files",
@@ -19,7 +24,7 @@ const inter = Inter({
   display: "swap",
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -27,14 +32,18 @@ export default function RootLayout({
   return (
     <html data-theme="dim" lang="en">
       <body className={`${inter.className} antialiased`}>
-        <div className=" min-h-screen overflow-auto bg-black flex items-center justify-center text-white">
-          <StarfieldCanvas />
+        <ViewportHeightFix />
+        <SessionProvider>
+          <AnonymousSignin />
+          <div className=" min-h-screen overflow-auto bg-black flex items-center justify-center text-white">
+            <StarfieldCanvas />
 
-          <div className="h-screen z-10 flex flex-col">
-            <ReactQueryProvider>{children}</ReactQueryProvider>
-            <Analytics />
+            <div className="h-screen z-10 flex flex-col">
+              <ReactQueryProvider>{children}</ReactQueryProvider>
+              <Analytics />
+            </div>
           </div>
-        </div>
+        </SessionProvider>
       </body>
     </html>
   );

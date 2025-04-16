@@ -40,7 +40,7 @@ const DownloadLayout = () => {
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             handleDownload(
-              "https://dl.dropboxusercontent.com/scl/fi/sdupb68odyuz1d9jpmb8b/Life-In-The-Fast-Brain-Stems.zip?rlkey=rzwsolwvzltc8mbgy706qpxnv&dl=1"
+              "https://dl.dropboxusercontent.com/scl/fi/8uqveu1yffsdp4t35p40i/Life-In-The-Fast-Brain.zip?rlkey=m0qhbbcukwp5ehhya2ixbomw8&st=ovbs1hlq&dl=1"
             );
             mutate()
           }}

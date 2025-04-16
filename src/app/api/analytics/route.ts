@@ -1,14 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
 import clientPromise from "../../lib/mongodb"; // adjust this path if needed
 import rateLimit from "next-rate-limit";
+import { auth } from "../../../../auth";
 
 const limiter = rateLimit({
   interval: 60 * 1000,
   uniqueTokenPerInterval: 500,
 });
 export async function POST(req: NextRequest) {
+  const session = await auth();
+
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  if (session) {
+    const user = session?.user as typeof session.user & { role: string };
+    if (user?.role !== "anon") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+  }
+
   try {
-    await limiter.checkNext(req, 100); 
+    await limiter.checkNext(req, 50);
   } catch {
     return NextResponse.json({ message: "Too many requests" }, { status: 429 });
   }

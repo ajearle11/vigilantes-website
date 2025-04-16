@@ -3,13 +3,18 @@
   themes: goldenRecord --default;
 }
 
+.full-height {
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+
 /* Kill all hover styles on mobile/touch */
-@media (hover: none) {
+/* @media (hover: none) {
   .btn:hover {
     background-color: transparent !important;
     color: oklch(72.57% .194 100.43);
   }
-}
+} */
 
 @plugin "daisyui/theme" {
   name: "goldenRecord";
