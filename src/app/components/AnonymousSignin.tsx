@@ -8,7 +8,6 @@ export default function AnonymousSignin() {
     const checkSession = async () => {
       const session = await getSession();
       if (!session) {
-        console.log('[Auth] No session, re-signing in...');
         await signIn('credentials', { redirect: false });
       }
     };
