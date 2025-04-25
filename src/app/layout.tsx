@@ -38,7 +38,7 @@ export default async function RootLayout({
           <div className=" min-h-screen overflow-auto bg-black flex items-center justify-center text-white">
             <StarfieldCanvas />
 
-            <div className="h-screen z-10 flex flex-col">
+            <div className="min-h-screen z-10 flex flex-col">
               <ReactQueryProvider>{children}</ReactQueryProvider>
               <Analytics />
             </div>
