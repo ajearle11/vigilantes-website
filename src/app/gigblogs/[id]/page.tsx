@@ -25,8 +25,8 @@ export default async function BlogPost({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="my-10">
-      <Link className="text-[#888] hover:text-white" key={post.id} href={`/gigblogs`}>
+    <div className="my-10 w-full max-w-200">
+      <Link className="relative top-0 left-10 text-[#888] hover:text-white" key={post.id} href={`/gigblogs`}>
         Back
       </Link>
       <div className="text-xl text-center uppercase text-[#888] mb-1 mt-10 font-mono">
@@ -43,7 +43,7 @@ export default async function BlogPost({ params }: { params: { id: string } }) {
           - Sound Guy
         </div>
       </div>
-      <div className="text-lg text-center text-[#888] mb-7 font-mono">
+      <div className="text-lg text-center text-[#888] mb-7 mx-10 font-mono">
         {post.content}
       </div>
     </div>
