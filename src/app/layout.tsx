@@ -2,6 +2,7 @@ import "./globals.css";
 import { ReactQueryProvider } from "./providers/ReactQueryProvider";
 import {
   AnonymousSignin,
+  Navbar,
   StarfieldCanvas,
   ViewportHeightFix,
 } from "./components";
@@ -37,8 +38,8 @@ export default async function RootLayout({
           <AnonymousSignin />
           <div className=" min-h-screen overflow-auto bg-black flex items-center justify-center text-white">
             <StarfieldCanvas />
-
-            <div className="h-screen z-10 flex flex-col">
+            <div className="h-screen w-screen z-10 flex flex-col items-center">
+              <Navbar />
               <ReactQueryProvider>{children}</ReactQueryProvider>
               <Analytics />
             </div>
