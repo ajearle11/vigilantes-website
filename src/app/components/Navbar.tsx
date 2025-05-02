@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
@@ -27,20 +28,20 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a href="/">Homepage</a>
+              <Link href="/">Homepage</Link>
             </li>
             <li>
-              <a href="/gigblogs">Gig Blogs</a>
+              <Link href="/gigblogs">Gig Blogs</Link>
             </li>
-           
           </ul>
         </div>
       </div>
       <div className="navbar-center">
-        <a href="/" className="btn btn-ghost text-lg font-mono uppercase">Vigilantes Archive Access</a>
+        <Link href="/" className="btn btn-ghost text-lg font-mono uppercase">
+          Vigilantes Archive Access
+        </Link>
       </div>
-      <div className="navbar-end">
-      </div>
+      <div className="navbar-end"></div>
     </div>
   );
 };

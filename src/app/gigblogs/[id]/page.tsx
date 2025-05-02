@@ -3,13 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 type PageProps = {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>
 };
 
 export default async function BlogPost({ params }: PageProps) {
-  const { id } = params;
+  const { id } = await params;
   const post = posts.find((p) => p.id === id);
 
   if (!post) notFound();
@@ -31,7 +29,7 @@ export default async function BlogPost({ params }: PageProps) {
       </div>
       <div className="bg-primary p-5 mb-10 mx-10 rounded-xl text-primary-content">
         <div className="text-xl italic text-center uppercase mb-1 font-mono">
-          "{post.quote}"
+          “{post.quote}”
         </div>
         <div className="text-md italic text-center font-mono">- Sound Guy</div>
       </div>
