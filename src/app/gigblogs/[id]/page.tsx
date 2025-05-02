@@ -1,28 +1,18 @@
-// import { getSession } from '@/lib/session'
 import { posts } from "@/app/lib/posts";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export default async function BlogPost({ params }: { params: { id: string } }) {
-  let value = await params;
-  console.log(value.id);
-  const post = posts.find((p) => p.id === value.id);
-  console.log(post);
+type PageProps = {
+  params: {
+    id: string;
+  };
+};
+
+export default async function BlogPost({ params }: PageProps) {
+  const { id } = params;
+  const post = posts.find((p) => p.id === id);
 
   if (!post) notFound();
-
-  //   const session = await getSession()
-  //   const isAllowed = !post.private || session.user
-
-  //   if (!isAllowed) {
-  if (false) {
-    return (
-      <div>
-        <h1>Restricted</h1>
-        <p>You must be logged in to view this post.</p>
-      </div>
-    );
-  }
 
   return (
     <div className="my-10 w-full max-w-200">
