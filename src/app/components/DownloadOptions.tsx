@@ -7,11 +7,11 @@ import { handleDownload } from "../utils/helpers";
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { sendAnalytics } from "../utils/apiRequests";
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 
 const DownloadLayout = () => {
   const [timestamp, setTimestamp] = useState(0);
-  const router = useRouter()
+  // const router = useRouter()
 
   useEffect(() => {
     setTimestamp(Date.now());
