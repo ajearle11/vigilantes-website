@@ -21,6 +21,10 @@ const DownloadLayout = () => {
     "https://shattereddisk.github.io/rickroll/rickroll.mp4"
   );
 
+  const bandcamp = useNavigateToUrl(
+    "https://vigilantesband.bandcamp.com/album/golden-record"
+  );
+
   const goToGoldenRecord = useNavigateToUrl("https://goldenrecord.org");
 
   const { mutate } = useMutation({
@@ -35,16 +39,18 @@ const DownloadLayout = () => {
         </div> */}
         <Button
           onClick={goToGoldenRecord}
-          title="Golden Record"
+          title="Voyager Golden Record"
           twColor="btn-primary"
         />
+
+        <Button onClick={bandcamp} title="Golden Record Album Merch/Preorders" twColor="btn-primary" />
         <Button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             handleDownload(
               "https://dl.dropboxusercontent.com/scl/fi/8uqveu1yffsdp4t35p40i/Life-In-The-Fast-Brain.zip?rlkey=m0qhbbcukwp5ehhya2ixbomw8&st=ovbs1hlq&dl=1"
             );
-            mutate()
+            mutate();
           }}
           title="Life In The Fast Brain Files"
           twColor="btn-primary"
@@ -55,7 +61,7 @@ const DownloadLayout = () => {
             handleDownload(
               "https://dl.dropboxusercontent.com/scl/fi/otfkvex2h5lrddyg6x2ua/Mondays.zip?rlkey=a0287bhnn2idtwg4poy5irhjr&st=ezb281nc&dl=1"
             );
-            mutate()
+            mutate();
           }}
           title="Mondays Files"
           twColor="btn-primary"
