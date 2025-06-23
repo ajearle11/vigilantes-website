@@ -3,6 +3,7 @@
   themes: goldenRecord --default;
 }
 
+
 .full-height {
   height: calc(var(--vh, 1vh) * 100);
 }
@@ -76,4 +77,15 @@
       transform: translateX(0);
     }
   }
+}
+
+
+.hover-image {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.1s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+  object-fit: cover;
+  border-radius: 10px;
 }

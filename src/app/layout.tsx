@@ -6,9 +6,13 @@ import {
   StarfieldCanvas,
   ViewportHeightFix,
 } from "./components";
-import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SessionProvider } from "./providers/SessionProvider";
+import localFont from 'next/font/local'
+ 
+const myFont = localFont({
+  src: '../../public/Chrome.otf',
+})
 
 export const metadata = {
   title: "Vigilantes Files",
@@ -20,10 +24,6 @@ export const metadata = {
   },
 };
 
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export default async function RootLayout({
   children,
@@ -31,8 +31,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html data-theme="dim" lang="en">
-      <body className={`${inter.className} antialiased`}>
+    <html data-theme="dim" lang="en" className={`${myFont.className}`}>
+      <body>
         <ViewportHeightFix />
         <SessionProvider>
           <AnonymousSignin />

@@ -56,7 +56,7 @@ const Input = ({ image = false, imagesrc }: TInput) => {
   return (
     <div className="w-full max-w-md mx-auto text-center  flex justify-center">
       <fieldset className="fieldset">
-        <legend className="fieldset-legend mb-1 opacity-80">
+        <legend className="fieldset-legend font-mono mb-1 opacity-80">
           Want to stay informed? Add your email address here
         </legend>
         <label
@@ -92,7 +92,7 @@ const Input = ({ image = false, imagesrc }: TInput) => {
             }}
             value={email}
             type="email"
-            className="grow"
+            className="grow font-mono"
             placeholder="Enter your email"
           />
           {image && (

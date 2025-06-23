@@ -1,12 +1,13 @@
 "use client";
 
-import { Button } from "./";
+import { Button, InteractiveImage } from "./";
 import { useNavigateToUrl } from "../hooks";
 import { Input } from "./";
 import { handleDownload } from "../utils/helpers";
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { sendAnalytics } from "../utils/apiRequests";
+
 // import { useRouter } from 'next/navigation'
 
 const DownloadLayout = () => {
@@ -33,17 +34,26 @@ const DownloadLayout = () => {
 
   return (
     <>
-      <div className="flex flex-col max-w-[550px] my-30 h-[100%] justify-center">
+      <div className="w-full max-w-[550px] mt-10 mb-5 text-center">
+        <InteractiveImage />
+      </div>
+      <div className="block flex flex-col max-w-[550px] mb-30 justify-center">
         {/* <div className="text-xs text-center uppercase tracking-widest text-[#888] mb-4 font-mono">
           Vigilantes Archive Access
-        </div> */}
+          </div> */}
         <Button
-          onClick={goToGoldenRecord}
-          title="Voyager Golden Record"
+          onClick={bandcamp}
+          title="Pre-order Golden Record"
           twColor="btn-primary"
         />
-
-        <Button onClick={bandcamp} title="Golden Record Album Merch/Preorders" twColor="btn-primary" />
+        <Button
+          onClick={goToGoldenRecord}
+          title="Inspiration Behind The Album"
+          twColor="btn-primary"
+        />
+        <p className="text-[20px] sm:text-[30px] md:text-[40px] lg:text-[45px] xl:text-[50px] text-[#ddd] pt-15 pb-5 text-center">
+          Stems
+        </p>
         <Button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();

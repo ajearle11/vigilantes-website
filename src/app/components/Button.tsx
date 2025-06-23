@@ -28,7 +28,7 @@ const Button = ({ title, twColor, onClick }: TButton) => {
         e.currentTarget.blur();
         onClick(e);
       }}
-      className={`p-8 text-lg md:text-xl  font-mono uppercase btn btn-xl btn-outline ${twColor} opacity-80 my-4 mx-5 font-bold ${colorSwitch(twColor)}`}
+      className={`p-8 text-sm md:text-lg font-mono uppercase btn btn-xl btn-outline ${twColor} opacity-80 my-4 mx-5 font-bold ${colorSwitch(twColor)}`}
 
     >
       {title}
