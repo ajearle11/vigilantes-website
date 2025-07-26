@@ -84,7 +84,7 @@ const DownloadLayout = () => {
             );
             mutate();
           }}
-          title="Mondays Files"
+          title="Sink Files"
           twColor="btn-primary"
         />
         {/* <Button onClick={() => router.push("/gigblogs")} title="Gig Blogs" twColor="btn-primary" /> */}
