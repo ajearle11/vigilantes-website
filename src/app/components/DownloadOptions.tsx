@@ -76,6 +76,17 @@ const DownloadLayout = () => {
           title="Mondays Files"
           twColor="btn-primary"
         />
+        <Button
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+            e.preventDefault();
+            handleDownload(
+              "https://dl.dropboxusercontent.com/scl/fi/ijra5ymz5i6htkj1m9vfs/Sink-Stems.zip?rlkey=y1cx7bh8l8hi3450fet5io8fe&st=g3qx71td&dl=0"
+            );
+            mutate();
+          }}
+          title="Mondays Files"
+          twColor="btn-primary"
+        />
         {/* <Button onClick={() => router.push("/gigblogs")} title="Gig Blogs" twColor="btn-primary" /> */}
         <Button onClick={rickRoll} title="More Info..." twColor="btn-primary" />
         {/* <Button onClick={rickRoll} title="Sink" twColor="accent" /> */}
